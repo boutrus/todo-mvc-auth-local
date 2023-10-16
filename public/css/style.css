@@ -1,10 +1,138 @@
-h1{
-    color: red;
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
 }
-.completed{
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation Links */
+a {
+    text-decoration: none;
+    color: #007BFF;
+    margin: 10px;
+}
+
+/* Header Styles */
+h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+/* Form Styles */
+form {
+    margin: 20px 0;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+input[type="submit"] {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Alert Styles */
+.alert {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #dc3545;
+    background-color: #f8d7da;
+    color: #721c24;
+    border-radius: 5px;
+}
+
+/* List Styles */
+ul {
+    list-style: none;
+}
+
+.todoItem {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.todoItem:hover {
+    background-color: #f0f0f0;
+}
+
+.completed {
     text-decoration: line-through;
-    color: gray;
+    color: #6c757d;
 }
-.not{
+
+.del {
+    color: #dc3545;
+    cursor: pointer;
+}
+
+/* Hover Effect for Delete */
+.del:hover {
     text-decoration: underline;
+}
+
+/* Additional Styles for Specific Pages */
+/* You can add styles specific to each HTML page if needed */
+
+/* Styling for the 'login' page */
+.login-container {
+    text-align: center;
+}
+
+.login-container h1 {
+    font-size: 32px;
+    color: #007BFF;
+    margin-bottom: 20px;
+}
+
+/* Styling for the 'signup' page */
+.signup-container {
+    text-align: center;
+}
+
+.signup-container h1 {
+    font-size: 32px;
+    color: #007BFF;
+    margin-bottom: 20px;
+}
+
+/* Styling for the 'todos' page */
+.todos-container {
+    text-align: center;
+}
+
+.todos-container h1 {
+    font-size: 32px;
+    color: #007BFF;
+    margin-bottom: 20px;
 }
