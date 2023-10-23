@@ -11,25 +11,42 @@ module.exports = {
             console.log(err)
         }
     },
-    createTodo: async (req, res)=>{
-        try{
-            await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id})
-            console.log('Todo has been added!')
-            res.redirect('/todos')
-        }catch(err){
-            console.log(err)
-        }
+    createTodo: async (req, res) => {
+        try {
+          const { todoItem, priority, category, dateAdded, description } = req.body;
+          
+          // Assuming you have the user ID in req.user
+          const newTodo = await Todo.create({
+            todo: todoItem,
+            completed: false,
+            userId: req.user.id,
+            priority,   // Include the priority from req.body
+            category,   // Include the category from req.body
+            dateAdded, 
+            description,
+          });
+    
+          console.log('Todo has been added!');
+          res.redirect('/todos');
+        } catch (err) {
+          console.log(err);
+          res.status(500).send('Internal Server Error');
+        }    
     },
-    markComplete: async (req, res)=>{
-        try{
-            await Todo.findOneAndUpdate({_id:req.body.todoIdFromJSFile},{
-                completed: true
-            })
-            console.log('Marked Complete')
-            res.json('Marked Complete')
-        }catch(err){
-            console.log(err)
+    markComplete: async (req, res) => {
+        try {
+          await Todo.findOneAndUpdate(
+            { _id: req.body.todoIdFromJSFile },
+            {
+              completed: true
+            }
+          );
+          console.log('Marked Complete');
+          res.json({ message: 'Marked Complete', complete: true }); // Include 'complete' in the response
+        } catch (err) {
+          console.log(err);
         }
+      
     },
     markIncomplete: async (req, res)=>{
         try{

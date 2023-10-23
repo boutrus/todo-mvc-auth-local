@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
         div {
@@ -12,30 +13,89 @@
           padding-right: 20px;
         }
     </style>
-    <title>Document</title>
+    <title>List</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div>
-    <h1>Todos</h1>
-    <ul>
-    <% todos.forEach( el => { %>
-            <li class='todoItem' data-id='<%=el._id%>'>
-                <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
-                <span class='del'> Delete </span>
-            </li>
-    <% }) %>    
-    </ul>
+    <h1><%= user.userName %>'s To Do list.</h1>
+    <hr>
+    <br>
+    <div id="sorting-options">
+        <label for="sortCriteria">Sort By:</label>
+        <select id="sortCriteria">
+            <option value="todo">Todo</option>
+            <option value="description">Description</option>
+            <option value="priority">Priority</option>
+            <option value="dateAdded">Date Added</option>
+            <option value="category">Category</option>
+        </select>
+        <button id="sortButton">Sort</button>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Todo</th>
+                <th>Description</th>
+                <th>Priority</th>
+                <th>Category</th>
+                <th>Date Added</th>
+                <th data-icon="complete"><i class="fas fa-check-circle complete"></i></th>
+                <th data-icon="incomplete"><i class="fas fa-times-circle incomplete"></i></th>
+                <th data-icon="delete"><i class="fas fa-trash-alt del"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% todos.forEach(el => { %>
+                <tr data-id='<%= el._id %>'>
+                    <td data-todo="<%= el.todo %>" class='<%= el.completed === true ? "completed" : "not" %>'><%= el.todo %></td>
+                    <td data-description="<%= el.description %>"><%= el.description %></td>
+                    <td data-priority="<%= el.priority %>"><%= el.priority %></td>
+                    <td data-category="<%= el.category %>"><%= el.category %></td>
+                    <td data-dateAdded="<%= el.dateAdded %>"><%= el.dateAdded ? el.dateAdded.toDateString() : "N/A" %></td>
+                    <td data-action="complete">
+                        <i class="fas fa-check-circle complete" onclick="markComplete('<%= el._id %>')"></i>
+                    </td>
+                    <td data-action="incomplete">
+                        <i class="fas fa-times-circle incomplete" onclick="markIncomplete('<%= el._id %>')"></i>
+                    </td>
+                    <td data-action="delete">
+                        <i class="fas fa-trash-alt del" onclick="deleteTodo('<%= el._id %>')"></i>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+        
+    </table>
+    
+    
 
     <h2><%= user.userName %> has <%= left %> things left to do.</h2>
     
 
     <div>
-    <form action="/todos/createTodo" method='POST'>
-        <input type="text" placeholder="Enter Todo Item" name='todoItem'>
-        <input type="submit">
-    </form>
+        <form action="/todos/createTodo" method='POST'>
+            <input type="text" placeholder="Enter Todo Item" name='todoItem'>
+            <input type="text" placeholder="Add Description" name='description'> <!-- Added description input -->
+            <select name="priority">
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+            <select name="category">
+                <option value="level1">Urgent and important</option>
+                <option value="level2">Time sensitive but less important</option>
+                <option value="level3">Important but not time sensitive</option>
+                <option value="level4">Not important and not urgent</option>
+                <!-- You can add more options here -->
+            </select>
+            <br>
+            <input type="date" name="dateAdded">
+            <input type="submit">
+        </form>
     </div>
+    
 
     <div>
     <button>

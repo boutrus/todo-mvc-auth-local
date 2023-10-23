@@ -84,8 +84,10 @@ exports.postSignup = (req, res, next) => {
     gmail_remove_dots: false,
   });
 
+  const capitalizedUserName = req.body.userName.charAt(0).toUpperCase() + req.body.userName.slice(1);
+
   const user = new User({
-    userName: req.body.userName,
+    userName: capitalizedUserName,
     email: req.body.email,
     password: req.body.password,
   });
